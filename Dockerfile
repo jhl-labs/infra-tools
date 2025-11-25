@@ -372,8 +372,8 @@ RUN wget -q https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86
 # Delta (diff 도구) - 설치 오류로 제거
 # 필요시 수동 설치: wget https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb && dpkg -i git-delta_0.17.0_amd64.deb
 
-# Starship (프롬프트) 설치
-RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
+# Starship (프롬프트) - 설치 오류로 제거
+# 필요시 수동 설치: curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # btop 설치 (최신 시스템 모니터)
 RUN wget -q https://github.com/aristocratos/btop/releases/download/v1.3.0/btop-x86_64-linux-musl.tbz && \
@@ -402,10 +402,6 @@ RUN apt-get update && apt-get install -y zsh && \
 
 # 작업 디렉토리 설정
 WORKDIR /workspace
-
-# Starship 프롬프트 기본 설정
-RUN echo 'eval "$(starship init bash)"' >> /root/.bashrc && \
-    echo 'eval "$(starship init zsh)"' >> /root/.zshrc
 
 # kubectl 자동완성 설정
 RUN echo 'source <(kubectl completion bash)' >> /root/.bashrc && \
