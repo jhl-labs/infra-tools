@@ -370,11 +370,13 @@ RUN mkdir -p /tmp/exa && cd /tmp/exa && \
     mv bin/exa /usr/local/bin/ && \
     cd / && rm -rf /tmp/exa
 
-# Delta (diff 도구) - 설치 오류로 제거
-# 필요시 수동 설치: wget https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb && dpkg -i git-delta_0.17.0_amd64.deb
+# Delta (diff 도구) 설치
+RUN wget -q https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb && \
+    dpkg -i git-delta_0.17.0_amd64.deb && \
+    rm git-delta_0.17.0_amd64.deb
 
-# Starship (프롬프트) - 설치 오류로 제거
-# 필요시 수동 설치: curl -sS https://starship.rs/install.sh | sh -s -- -y
+# Starship (프롬프트) 설치
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # btop 설치 (최신 시스템 모니터)
 RUN wget -q https://github.com/aristocratos/btop/releases/download/v1.3.0/btop-x86_64-linux-musl.tbz && \
