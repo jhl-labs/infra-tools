@@ -355,12 +355,13 @@ RUN wget -q https://dl.smallstep.com/gh-release/cli/gh-release-header/v0.25.0/st
     rm step-cli_0.25.0_amd64.deb
 
 # AI Ops 도구
-# Ollama 설치 (로컬 LLM)
-RUN curl -fsSL https://ollama.com/install.sh | sh
-
 # LLM CLI 도구 (Simon Willison) 설치
-RUN pipx install llm && \
-    pipx install aichat
+RUN pipx install llm
+
+# 참고: Ollama와 aichat은 크기가 매우 커서 제외
+# 필요시 컨테이너 내에서 별도로 설치 가능:
+# curl -fsSL https://ollama.com/install.sh | sh
+# pipx install aichat
 
 # Exa (ls 대체) 설치
 RUN wget -q https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip && \
