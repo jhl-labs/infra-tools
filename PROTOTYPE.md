@@ -12,7 +12,7 @@
 
 ## 쿠버네티스 클러스터 관리 도구
 - 핵심 도구: kubectl, helm, kustomize
-- 컨텍스트 관리: kubectx, kubens, kubeswitch
+- 컨텍스트 관리: kubectx, kubens
 - 대화형 관리: k9s, stern (로그 스트리밍)
 - 디버깅: kubectl-debug, kubectl-tree, kubectl-view-allocations
 - 정책 관리: kyverno-cli, kube-bench, kubesec
@@ -20,7 +20,7 @@
 
 ## 컨테이너 및 이미지 관리
 - 런타임: docker-cli, podman, nerdctl
-- 이미지 도구: skopeo, crane, dive (이미지 레이어 분석)
+- 이미지 도구: skopeo, crane, buildah, dive (이미지 레이어 분석)
 - 레지스트리: registry-cli, harbor-cli
 - 취약점 스캔: trivy, grype, syft (SBOM 생성)
 
@@ -28,6 +28,7 @@
 - Ceph: ceph-cli, rados, rbd, cephfs-shell
 - 범용 스토리지: s3cmd, mc (MinIO client), rclone
 - 볼륨 관리: lvm2, parted, gdisk
+- 기타: goofys
 
 ## GitOps 및 CI/CD 도구
 - GitOps: argocd-cli, flux, helmfile
