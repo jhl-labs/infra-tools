@@ -364,10 +364,11 @@ RUN pipx install llm
 # pipx install aichat
 
 # Exa (ls 대체) 설치
-RUN wget -q https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip && \
+RUN mkdir -p /tmp/exa && cd /tmp/exa && \
+    wget -q https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86_64-v0.10.1.zip && \
     unzip exa-linux-x86_64-v0.10.1.zip && \
     mv bin/exa /usr/local/bin/ && \
-    rm -rf ./bin ./completions ./man exa-linux-x86_64-v0.10.1.zip
+    cd / && rm -rf /tmp/exa
 
 # Delta (diff 도구) - 설치 오류로 제거
 # 필요시 수동 설치: wget https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb && dpkg -i git-delta_0.17.0_amd64.deb
