@@ -369,10 +369,8 @@ RUN wget -q https://github.com/ogham/exa/releases/download/v0.10.1/exa-linux-x86
     mv bin/exa /usr/local/bin/ && \
     rm -rf bin exa-linux-x86_64-v0.10.1.zip
 
-# Delta (diff 도구) 설치
-RUN wget -q https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb && \
-    dpkg -i git-delta_0.17.0_amd64.deb && \
-    rm git-delta_0.17.0_amd64.deb
+# Delta (diff 도구) - 설치 오류로 제거
+# 필요시 수동 설치: wget https://github.com/dandavison/delta/releases/download/0.17.0/git-delta_0.17.0_amd64.deb && dpkg -i git-delta_0.17.0_amd64.deb
 
 # Starship (프롬프트) 설치
 RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
