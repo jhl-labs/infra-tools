@@ -1,0 +1,26 @@
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+README.md
+PROTOTYPE.md
+*.md
+
+# CI/CD
+.github/workflows
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

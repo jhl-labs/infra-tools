@@ -108,7 +108,37 @@
 - **셸 개선**: zsh, oh-my-zsh, starship (프롬프트)
 - **벤치마크**: hyperfine
 
-## 빌드 방법
+## 이미지 가져오기
+
+### GitHub Container Registry에서 바로 사용
+
+GitHub Actions CI/CD를 통해 자동으로 빌드된 이미지를 바로 사용할 수 있습니다:
+
+```bash
+# 최신 이미지 pull
+docker pull ghcr.io/jhl-labs/infra-tools:latest
+
+# 바로 실행
+docker run -it --rm ghcr.io/jhl-labs/infra-tools:latest
+```
+
+### CI/CD 자동 빌드
+
+이 레포지토리는 GitHub Actions를 통해 자동으로 이미지를 빌드하고 GHCR에 푸시합니다:
+
+- **트리거**: `main` 브랜치에 push, Pull Request, 또는 태그 생성 시
+- **레지스트리**: GitHub Container Registry (ghcr.io)
+- **태그 전략**:
+  - `latest`: main 브랜치의 최신 버전
+  - `main`: main 브랜치 이미지
+  - `v*.*.*`: semantic versioning 태그 (예: v1.0.0)
+  - `SHA`: 커밋 해시 기반 태그
+
+워크플로우 상태: [![Build and Push to GHCR](https://github.com/jhl-labs/infra-tools/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/jhl-labs/infra-tools/actions/workflows/docker-publish.yml)
+
+## 로컬 빌드 방법
+
+필요한 경우 로컬에서 직접 빌드할 수 있습니다:
 
 ### 이미지 빌드
 
@@ -119,6 +149,11 @@ docker build -t infra-tools:latest .
 ### 태그 및 푸시 (선택사항)
 
 ```bash
+# GHCR에 푸시
+docker tag infra-tools:latest ghcr.io/jhl-labs/infra-tools:latest
+echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+docker push ghcr.io/jhl-labs/infra-tools:latest
+
 # Docker Hub에 푸시
 docker tag infra-tools:latest your-registry/infra-tools:latest
 docker push your-registry/infra-tools:latest
@@ -134,18 +169,18 @@ docker push harbor.example.com/platform/infra-tools:latest
 
 ```bash
 # 기본 실행
-docker run -it --rm infra-tools:latest
+docker run -it --rm ghcr.io/jhl-labs/infra-tools:latest
 
 # kubeconfig 마운트하여 실행
 docker run -it --rm \
   -v ~/.kube:/root/.kube:ro \
-  infra-tools:latest
+  ghcr.io/jhl-labs/infra-tools:latest
 
 # 작업 디렉토리 마운트
 docker run -it --rm \
   -v $(pwd):/workspace \
   -v ~/.kube:/root/.kube:ro \
-  infra-tools:latest
+  ghcr.io/jhl-labs/infra-tools:latest
 ```
 
 ### 2. Kubernetes Pod으로 실행
@@ -155,7 +190,7 @@ docker run -it --rm \
 ```bash
 kubectl run debug-pod \
   --rm -it \
-  --image=infra-tools:latest \
+  --image=ghcr.io/jhl-labs/infra-tools:latest \
   --restart=Never \
   -- /bin/zsh
 ```
@@ -171,7 +206,7 @@ metadata:
 spec:
   containers:
   - name: infra-tools
-    image: infra-tools:latest
+    image: ghcr.io/jhl-labs/infra-tools:latest
     command: ["/bin/zsh"]
     stdin: true
     tty: true
@@ -208,7 +243,7 @@ spec:
     spec:
       containers:
       - name: infra-tools
-        image: infra-tools:latest
+        image: ghcr.io/jhl-labs/infra-tools:latest
         command: ["/bin/bash", "-c"]
         args:
           - |
@@ -230,7 +265,7 @@ spec:
 
 ```bash
 # Pod 실행
-kubectl run debug --rm -it --image=infra-tools:latest -- /bin/zsh
+kubectl run debug --rm -it --image=ghcr.io/jhl-labs/infra-tools:latest -- /bin/zsh
 
 # 클러스터 상태 확인
 kubectl get nodes
