@@ -85,7 +85,6 @@ RUN apt-get update && apt-get install -y \
     # 기타 유틸리티
     uuid-runtime \
     pwgen \
-    ntp \
     chrony \
     make \
     parallel \
