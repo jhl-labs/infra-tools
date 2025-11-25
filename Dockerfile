@@ -98,6 +98,9 @@ RUN add-apt-repository ppa:deadsnakes/ppa -y && \
     python${PYTHON_VERSION}-dev \
     python${PYTHON_VERSION}-venv \
     python3-pip \
+    libpq-dev \
+    default-libmysqlclient-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/* && \
     update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
@@ -113,10 +116,10 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
     httpie \
     glances \
     s3cmd \
+    psycopg2-binary \
     litecli \
     pgcli \
-    mycli \
-    aider-chat
+    mycli
 
 # Node.js 설치
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION} | bash - && \
