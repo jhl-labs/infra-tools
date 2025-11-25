@@ -156,7 +156,7 @@ RUN wget -q https://github.com/derailed/k9s/releases/download/v${K9S_VERSION}/k9
     rm k9s_Linux_amd64.tar.gz
 
 # stern (로그 스트리밍) 설치
-RUN wget -q https://github.com/stern/stern/releases/latest/download/stern_linux_amd64 -O /usr/local/bin/stern && \
+RUN curl -sL https://github.com/stern/stern/releases/latest/download/stern_linux_amd64 -o /usr/local/bin/stern && \
     chmod +x /usr/local/bin/stern
 
 # kustomize 설치
@@ -257,7 +257,7 @@ RUN ETCD_VER=v3.5.11 && \
     rm -rf etcd-${ETCD_VER}-linux-amd64*
 
 # yq 설치
-RUN wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && \
+RUN curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq
 
 # Prometheus CLI (promtool) 설치
