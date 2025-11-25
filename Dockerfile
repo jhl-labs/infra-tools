@@ -246,8 +246,14 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     redis-tools \
     sqlite3 \
-    mongodb-clients \
     && rm -rf /var/lib/apt/lists/*
+
+# MongoDB Shell (mongosh) 설치
+RUN curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg && \
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list && \
+    apt-get update && \
+    apt-get install -y mongodb-mongosh mongodb-database-tools && \
+    rm -rf /var/lib/apt/lists/*
 
 # etcdctl 설치
 RUN ETCD_VER=v3.5.11 && \
